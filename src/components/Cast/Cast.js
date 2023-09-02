@@ -2,7 +2,8 @@ import s from './Cast.module.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesCredits } from 'services/movies-api';
-
+const defaultImg =
+  'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 const Cast = () => {
   const { movieId } = useParams();
 
@@ -34,7 +35,11 @@ const Cast = () => {
           return (
             <li key={castItem.id} className={s.castItem}>
               <img
-                src={`https://image.tmdb.org/t/p/w300${castItem.profile_path}`}
+                src={
+                  castItem.profile_path
+                    ? `https://image.tmdb.org/t/p/w300${castItem.profile_path}`
+                    : defaultImg
+                }
                 alt={`${castItem.name} portrait`}
               />
               <div>

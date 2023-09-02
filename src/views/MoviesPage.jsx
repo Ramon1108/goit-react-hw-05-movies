@@ -1,9 +1,8 @@
-import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from 'components/MoviesPage/SearchBar';
 import { fetchByQuery } from 'services/movies-api';
-import MovieList from 'components/TrendingMovies/MovieList';
+import MovieList from 'components/MovieList/MovieList';
 import Container from 'components/Container/Container';
 import PageHeading from 'components/Pageheading/Pageheading';
 
@@ -13,7 +12,6 @@ const MoviesPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const location = useLocation();
   const searchRequest = searchParams.get('query');
 
   useEffect(() => {
@@ -53,9 +51,7 @@ const MoviesPage = () => {
         {error && <div>{error}</div>}
 
         <SearchBar onSearch={onSubmit} />
-        {movies.length > 0 && (
-          <MovieList movies={movies} prevLocation={location} />
-        )}
+        {movies.length > 0 && <MovieList movies={movies} />}
       </Container>
     </>
   );
